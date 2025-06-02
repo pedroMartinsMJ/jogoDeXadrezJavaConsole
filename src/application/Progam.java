@@ -1,12 +1,11 @@
 package application;
 
-import boardgame.Board;
+
 import chess.ChessException;
 import chess.ChessMatch;
 import chess.ChessPiece;
 import chess.ChessPosition;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,7 +17,7 @@ public class Progam {
         ChessMatch chessMatch = new ChessMatch();
         List<ChessPiece> captured = new ArrayList<>();
 
-        while (true) {
+        while (!chessMatch.getCheck()) {
             try {
                 UI.clearScreen();
 
@@ -45,5 +44,7 @@ public class Progam {
             }
         }
 
+        UI.clearScreen();
+        UI.printMatch(chessMatch, captured);
     }
 }
