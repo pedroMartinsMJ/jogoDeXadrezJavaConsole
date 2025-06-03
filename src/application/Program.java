@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Progam {
+public class Program {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         ChessMatch chessMatch = new ChessMatch();
@@ -38,6 +38,16 @@ public class Progam {
                 if (capturedPiece != null) {
                     captured.add(capturedPiece);
                 }
+
+                if(chessMatch.getPromoted() != null){
+                    System.out.println("Peça sera promovida para -> B / N / R / Q: ");
+                    String type = sc.nextLine().toUpperCase();
+                    while (!type.equals("B") && !type.equals("N") && !type.equals("R") && !type.equals("Q")){
+                        System.out.println("VALOR INVALIDO -> Peça sera promovida para -> B / N / R / Q: ");
+                        type = sc.nextLine().toUpperCase();
+                    }
+                    chessMatch.replacePromotedPiece(type);
+                }
             }catch (ChessException | InputMismatchException e){
                 System.out.println(e.getMessage());
                 sc.nextLine();
@@ -46,5 +56,6 @@ public class Progam {
 
         UI.clearScreen();
         UI.printMatch(chessMatch, captured);
+        sc.close();
     }
 }
